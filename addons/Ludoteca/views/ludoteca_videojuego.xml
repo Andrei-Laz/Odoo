@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============ ACCIONES ============ -->
+
+    <!-- Acción para Videojuegos -->
+    <record id='ludoteca_videojuego_action' model='ir.actions.act_window'>
+        <field name="name">Videojuegos</field>
+        <field name="res_model">ludoteca.videojuego</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Acción para Desarrolladores -->
+    <record id='ludoteca_desarrollador_action' model='ir.actions.act_window'>
+        <field name="name">Desarrolladores</field>
+        <field name="res_model">ludoteca.desarrollador</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============ MENÚS ============ -->
+    <menuitem name="Ludoteca" id="ludoteca_menu" sequence="1"/>
+    
+    <menuitem 
+        name="Videojuegos" 
+        id="ludoteca_videojuego_menu" 
+        parent="ludoteca_menu" 
+        action="ludoteca_videojuego_action"
+        sequence="1"/>
+    
+    <menuitem 
+        name="Desarrolladores" 
+        id="ludoteca_desarrollador_menu" 
+        parent="ludoteca_menu" 
+        action="ludoteca_desarrollador_action"
+        sequence="2"/>
+
+    <!-- ============ VISTA FORM VIDEOJUEGO ============ -->
+    <record id="ludoteca_videojuego_view_form" model="ir.ui.view">
+        <field name="name">Videojuego - Formulario</field>
+        <field name="model">ludoteca.videojuego</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="nombre"/>
+                        <field name="plataforma"/>
+                        <field name="genero"/>
+                        <field name="fecha_lanzamiento"/>
+                        <field name="precio"/>
+                        <field name="desarrollador_id"/> <!-- ¡Relación visible aquí! -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============ VISTA LIST VIDEOJUEGO ============ -->
+    <record id="ludoteca_videojuego_view_list" model="ir.ui.view">
+        <field name="name">Videojuego - Lista</field>
+        <field name="model">ludoteca.videojuego</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="nombre"/>
+                <field name="plataforma"/>
+                <field name="genero"/>
+                <field name="desarrollador_id"/> <!-- Columna con el desarrollador -->
+            </list>
+        </field>
+    </record>
+
+    <!-- ============ VISTA FORM DESARROLLADOR ============ -->
+    <record id="ludoteca_desarrollador_view_form" model="ir.ui.view">
+        <field name="name">Desarrollador - Formulario</field>
+        <field name="model">ludoteca.desarrollador</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="nombre"/>
+                        <field name="pais"/>
+                    </group>
+                    
+                    <!-- Sublista de videojuegos de este desarrollador -->
+                    <notebook>
+                        <page string="Videojuegos">
+                            <field name="videojuegos_ids">
+                                <list>
+                                    <field name="nombre"/>
+                                    <field name="plataforma"/>
+                                    <field name="fecha_lanzamiento"/>
+                                    <field name="precio"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============ VISTA LIST DESARROLLADOR ============ -->
+    <record id="ludoteca_desarrollador_view_list" model="ir.ui.view">
+        <field name="name">Desarrollador - Lista</field>
+        <field name="model">ludoteca.desarrollador</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="nombre"/>
+                <field name="pais"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>
