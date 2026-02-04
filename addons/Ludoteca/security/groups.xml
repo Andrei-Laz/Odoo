@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <record id="grupo_empleado" model="res.groups">
-    
-        <field name="name">Empleado</field>
-    
-        <field name="comment">Grupo de usuarios con permisos para gestionar videojuegos.</field>
-    </record> -->
+    <!-- Solo existe el grupo por defecto de momento -->
 </odoo>
