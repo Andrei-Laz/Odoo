@@ -17,4 +17,5 @@ Gestor de videojuegos
         'security/ir.model.access.csv',
         'views/ludoteca_videojuego.xml'
     ],
+    'images': ['static/description/icon.png']
 }
