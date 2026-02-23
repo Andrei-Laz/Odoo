@@ -134,3 +134,17 @@ class LudotecaVideojuego(models.Model):
                     'La fecha de lanzamiento no puede ser posterior a hoy.\n'
                     f'Fecha introducida: {record.fecha_lanzamiento}'
                 )
+
+    def action_publish(self):
+        """Cambia el estado del videojuego a 'disponible'"""
+        for record in self:
+            if record.estado == 'borrador':
+                record.estado = 'disponible'
+        return True
+
+    def action_set_draft(self):
+        """Vuelve a poner el videojuego en estado borrador"""
+        for record in self:
+            if record.estado in ['disponible', 'agotado']:
+                record.estado = 'borrador'
+        return True

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 🎮 Kanban View: Videojuego -->
+    <record id="ludoteca_videojuego_view_kanban" model="ir.ui.view">
+        <field name="name">Videojuego - Kanban</field>
+        <field name="model">ludoteca.videojuego</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="estado">
+                <field name="id"/>
+                <field name="nombre"/>
+                <field name="descripcion"/>
+                <field name="precio"/>
+                <field name="calificacion"/>
+                <field name="desarrollador_id"/>
+                <field name="genero_ids"/>
+                <field name="estado"/>
+                
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('ludoteca.videojuego', 'image_128', record.id.raw_value)" alt="Game Cover" class="o_image_64_cover"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <h4 class="o_text_overflow">
+                                    <field name="nombre"/>
+                                </h4>
+                                <div>
+                                    <strong>Developer:</strong> <field name="desarrollador_id"/>
+                                </div>
+                                <div>
+                                    <strong>Price:</strong> <field name="precio"/>€
+                                </div>
+                                <div>
+                                    <strong>Rating:</strong> 
+                                    <field name="calificacion"/>/10
+                                </div>
+                                <div>
+                                    <field name="genero_ids" widget="many2many_tags"/>
+                                </div>
+                                <span t-attf-class="badge #{record.estado.raw_value == 'disponible' ? 'bg-success' : 'bg-secondary'}">
+                                    <field name="estado"/>
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- 📊 Graph View: Videojuego (evolución de precios por género) -->
+    <record id="ludoteca_videojuego_view_graph" model="ir.ui.view">
+        <field name="name">Videojuego - Graph</field>
+        <field name="model">ludoteca.videojuego</field>
+        <field name="arch" type="xml">
+            <graph string="Average Price by Genre" type="bar" stacked="0">
+                <field name="genero_ids" type="row"/>
+                <field name="precio" type="measure" operator="average"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Actualiza las acciones para incluir las nuevas vistas -->
+    <record id="ludoteca_videojuego_action" model="ir.actions.act_window">
+        <field name="name">Video Games</field>
+        <field name="res_model">ludoteca.videojuego</field>
+        <field name="view_mode">kanban,list,form,graph</field>
+        <field name="search_view_id" ref="ludoteca_videojuego_view_search"/>
+        <field name="context">{'search_default_group_by_estado': 1}</field>
+    </record>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Search View: Videojuego -->
+    <record id="ludoteca_videojuego_view_search" model="ir.ui.view">
+        <field name="name">Videojuego - Search</field>
+        <field name="model">ludoteca.videojuego</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nombre"/>
+                <field name="desarrollador_id"/>
+                <field name="genero_ids"/>
+                <field name="plataforma_ids"/>
+                <field name="estado"/>
+                
+                <filter name="filter_disponible" string="Available" domain="[('estado', '=', 'disponible')]"/>
+                <filter name="filter_borrador" string="Draft" domain="[('estado', '=', 'borrador')]"/>
+                <filter name="filter_precio_alto" string="Price &gt; 50€" domain="[('precio', '&gt;', 50)]"/>
+                
+                <separator/>
+                <filter name="group_by_genero" string="Group by Genre" context="{'group_by': 'genero_ids'}"/>
+                <filter name="group_by_desarrollador" string="Group by Developer" context="{'group_by': 'desarrollador_id'}"/>
+                <filter name="group_by_estado" string="Group by Status" context="{'group_by': 'estado'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Search View: Desarrollador -->
+    <record id="ludoteca_desarrollador_view_search" model="ir.ui.view">
+        <field name="name">Desarrollador - Search</field>
+        <field name="model">ludoteca.desarrollador</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nombre"/>
+                <field name="pais"/>
+                <filter name="filter_pais" string="By Country" context="{'group_by': 'pais'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Search View: Plataforma -->
+    <record id="ludoteca_plataforma_view_search" model="ir.ui.view">
+        <field name="name">Plataforma - Search</field>
+        <field name="model">ludoteca.plataforma</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nombre"/>
+                <field name="fabricante"/>
+                <filter name="group_by_fabricante" string="Group by Manufacturer" context="{'group_by': 'fabricante'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Search View: Género -->
+    <record id="ludoteca_genero_view_search" model="ir.ui.view">
+        <field name="name">Género - Search</field>
+        <field name="model">ludoteca.genero</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nombre"/>
+            </search>
+        </field>
+    </record>
+</odoo>

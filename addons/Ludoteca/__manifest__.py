@@ -13,9 +13,11 @@ Gestor de videojuegos
     'version': '0.1',
     'depends': ['base'],
     'data': [
-        'security/groups.xml',
-        'security/ir.model.access.csv',
-        'views/ludoteca_videojuego.xml'
+    'security/groups.xml',
+    'security/ir.model.access.csv',
+    'views/ludoteca_videojuego.xml',
+    'views/ludoteca_search_views.xml',
+    'views/ludoteca_advanced_views.xml',
     ],
     'images': ['static/description/icon.png']
 }
