@@ -16,11 +16,8 @@
                 <field name="estado"/>
                 
                 <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_global_click">
-                            <div class="o_kanban_image">
-                                <img t-att-src="kanban_image('ludoteca.videojuego', 'image_128', record.id.raw_value)" alt="Game Cover" class="o_image_64_cover"/>
-                            </div>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <h4 class="o_text_overflow">
                                     <field name="nombre"/>
