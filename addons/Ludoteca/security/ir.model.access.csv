@@ -3,3 +3,5 @@ access_ludoteca_videojuego,ludoteca.videojuego,model_ludoteca_videojuego,base.gr
 access_ludoteca_desarrollador,ludoteca.desarrollador,model_ludoteca_desarrollador,base.group_user,1,1,1,1
 access_ludoteca_genero,ludoteca.genero,model_ludoteca_genero,base.group_user,1,1,1,1
 access_ludoteca_plataforma,ludoteca.plataforma,model_ludoteca_plataforma,base.group_user,1,1,1,1
+access_ludoteca_worklog,ludoteca.worklog,model_ludoteca_worklog,base.group_user,1,1,1,1
+access_ludoteca_time_wizard,ludoteca.time.wizard,model_ludoteca_time_wizard,base.group_user,1,1,1,0

@@ -11,13 +11,16 @@ Gestor de videojuegos
     'website': "http://apuntesfpinformatica.es",
     'category': 'Productivity',
     'version': '0.1',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'data': [
     'security/groups.xml',
     'security/ir.model.access.csv',
-    'views/ludoteca_videojuego.xml',
+    'data/sequence_data.xml',
     'views/ludoteca_search_views.xml',
+    'views/ludoteca_wizard.xml',
+    'views/ludoteca_videojuego.xml',
     'views/ludoteca_advanced_views.xml',
+    'reports/ludoteca_report.xml',
     ],
     'images': ['static/description/icon.png']
 }

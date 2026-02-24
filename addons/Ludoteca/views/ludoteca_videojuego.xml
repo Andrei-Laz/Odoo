@@ -5,7 +5,7 @@
     <record id='ludoteca_videojuego_action' model='ir.actions.act_window'>
         <field name="name">Videojuegos</field>
         <field name="res_model">ludoteca.videojuego</field>
-        <field name="view_mode">kanban,calendar,list,form,graph</field>  <!-- ✅ Añadimos calendar -->
+        <field name="view_mode">kanban,list,form,graph</field>
         <field name="search_view_id" ref="ludoteca_videojuego_view_search"/>
     </record>
 
@@ -86,7 +86,7 @@
                             string="⏱ Log Time" 
                             type="action" 
                             class="btn-primary"
-                            context="{'default_task_id': active_id}"
+                            context="{'default_task_id': id}"
                             invisible="estado == 'descatalogado'"/>
                     <field name="estado" widget="statusbar" readonly="1"/>
                 </header>
@@ -139,24 +139,6 @@
                 <field name="calificacion" sum="Avg Rating"/>
                 <field name="estado" widget="badge" decoration-info="estado == 'borrador'" decoration-success="estado == 'disponible'" decoration-warning="estado == 'agotado'" decoration-danger="estado == 'descatalogado'"/>
             </list>
-        </field>
-    </record>
-
-        <!-- Vista Calendar: Videojuego (para mostrar deadlines/fechas de lanzamiento) -->
-    <record id="ludoteca_videojuego_view_calendar" model="ir.ui.view">
-        <field name="name">Videojuego - Calendar</field>
-        <field name="model">ludoteca.videojuego</field>
-        <field name="arch" type="xml">
-            <calendar date_start="fecha_lanzamiento" 
-                      color="desarrollador_id"
-                      mode="month"
-                      quick_add="False"
-                      event_open_string="Ver Videojuego">
-                <field name="nombre"/>
-                <field name="estado"/>
-                <field name="precio"/>
-                <field name="desarrollador_id"/>
-            </calendar>
         </field>
     </record>
 
