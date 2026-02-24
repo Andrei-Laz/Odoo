@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ludoteca_time_wizard_view_form" model="ir.ui.view">
+        <field name="name">Quick Time Entry</field>
+        <field name="model">ludoteca.time.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="task_id" invisible="1"/>
+                    <field name="hours"/>
+                    <field name="description"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="ludoteca_time_wizard_action" model="ir.actions.act_window">
+        <field name="name">Log Time</field>
+        <field name="res_model">ludoteca.time.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

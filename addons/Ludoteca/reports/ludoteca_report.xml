@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_task_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="task">
+                <div class="page">
+                    <h2>Task: <t t-esc="task.nombre"/></h2>
+                    <p><strong>Developer:</strong> <t t-esc="task.desarrollador_id.nombre"/></p>
+                    <p><strong>Deadline:</strong> <t t-esc="task.fecha_lanzamiento"/></p>
+                    <p><strong>Progress:</strong> <t t-esc="task.progress"/>%</p>
+                    <h3>Time Entries</h3>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr><th>Date</th><th>Hours</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="task.work_log_ids" t-as="log">
+                                <tr>
+                                    <td><t t-esc="log.date"/></td>
+                                    <td><t t-esc="log.hours"/></td>
+                                    <td><t t-esc="log.description"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_task_summary" model="ir.actions.report">
+        <field name="name">Task Summary</field>
+        <field name="model">ludoteca.videojuego</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ludoteca.report_task_summary</field>
+        <field name="report_file">ludoteca.report_task_summary</field>
+        <field name="binding_model_id" ref="model_ludoteca_videojuego"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

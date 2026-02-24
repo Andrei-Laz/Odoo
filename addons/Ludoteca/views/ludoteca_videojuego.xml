@@ -5,7 +5,8 @@
     <record id='ludoteca_videojuego_action' model='ir.actions.act_window'>
         <field name="name">Videojuegos</field>
         <field name="res_model">ludoteca.videojuego</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,calendar,list,form,graph</field>  <!-- ✅ Añadimos calendar -->
+        <field name="search_view_id" ref="ludoteca_videojuego_view_search"/>
     </record>
 
     <record id='ludoteca_desarrollador_action' model='ir.actions.act_window'>
@@ -81,6 +82,12 @@
                             type="object" 
                             class="btn-secondary"
                             invisible="estado == 'borrador'"/>
+                    <button name="%(ludoteca_time_wizard_action)d" 
+                            string="⏱ Log Time" 
+                            type="action" 
+                            class="btn-primary"
+                            context="{'default_task_id': active_id}"
+                            invisible="estado == 'descatalogado'"/>
                     <field name="estado" widget="statusbar" readonly="1"/>
                 </header>
                 
@@ -96,6 +103,8 @@
                             <field name="desarrollador_id" widget="selection"/>
                             <field name="fecha_lanzamiento" invisible="estado == 'borrador'"/>
                             <field name="precio" readonly="estado in ['agotado', 'descatalogado']"/>
+                            <field name="progress" widget="progressbar"/>
+                            <field name="total_hours" sum="Total Hours"/>
                         </group>
                         <group string="Classification">
                             <field name="genero_ids" widget="many2many_tags"/>
@@ -130,6 +139,24 @@
                 <field name="calificacion" sum="Avg Rating"/>
                 <field name="estado" widget="badge" decoration-info="estado == 'borrador'" decoration-success="estado == 'disponible'" decoration-warning="estado == 'agotado'" decoration-danger="estado == 'descatalogado'"/>
             </list>
+        </field>
+    </record>
+
+        <!-- Vista Calendar: Videojuego (para mostrar deadlines/fechas de lanzamiento) -->
+    <record id="ludoteca_videojuego_view_calendar" model="ir.ui.view">
+        <field name="name">Videojuego - Calendar</field>
+        <field name="model">ludoteca.videojuego</field>
+        <field name="arch" type="xml">
+            <calendar date_start="fecha_lanzamiento" 
+                      color="desarrollador_id"
+                      mode="month"
+                      quick_add="False"
+                      event_open_string="Ver Videojuego">
+                <field name="nombre"/>
+                <field name="estado"/>
+                <field name="precio"/>
+                <field name="desarrollador_id"/>
+            </calendar>
         </field>
     </record>
 
